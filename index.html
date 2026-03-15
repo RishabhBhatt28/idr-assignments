@@ -1,0 +1,1390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Institute of Digital Risk</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700;800;900&family=Barlow+Condensed:wght@600;700;800&family=DM+Sans:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet" />
+  <style>
+    /* ── RESET & BASE ─────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --orange: #FF6200;
+      --orange-dark: #C04800;
+      --orange-pale: #FFF0E6;
+      --black: #0D0D0D;
+      --ink: #1A1A1A;
+      --mid: #5A5A5A;
+      --mist: #F4F4F2;
+      --white: #FFFFFF;
+      --nav-h: 68px;
+      --radius: 4px;
+      --transition: 0.22s ease;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      color: var(--ink);
+      background: var(--white);
+      overflow-x: hidden;
+    }
+
+    img, svg { display: block; }
+    a { text-decoration: none; color: inherit; }
+
+    /* ── UTILITY ──────────────────────────────────────────────── */
+    .container {
+      width: 100%;
+      max-width: 1140px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .sr-only {
+      position: absolute; width: 1px; height: 1px;
+      overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 30px;
+      font-family: 'Barlow', sans-serif;
+      font-weight: 700;
+      font-size: 14px;
+      letter-spacing: 1.4px;
+      text-transform: uppercase;
+      border: 2px solid transparent;
+      cursor: pointer;
+      border-radius: var(--radius);
+      transition: background var(--transition), color var(--transition), border-color var(--transition), transform var(--transition);
+    }
+
+    .btn-primary {
+      background: var(--orange);
+      color: var(--white);
+      border-color: var(--orange);
+    }
+    .btn-primary:hover {
+      background: var(--orange-dark);
+      border-color: var(--orange-dark);
+      transform: translateY(-2px);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--white);
+      border-color: rgba(255,255,255,0.55);
+    }
+    .btn-outline:hover {
+      background: rgba(255,255,255,0.1);
+      border-color: var(--white);
+      transform: translateY(-2px);
+    }
+
+    .section-label {
+      font-family: 'Barlow', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--orange);
+      margin-bottom: 12px;
+    }
+
+    .section-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: clamp(32px, 4vw, 48px);
+      font-weight: 800;
+      line-height: 1.1;
+      color: var(--ink);
+      margin-bottom: 20px;
+    }
+
+    .section-body {
+      font-size: 17px;
+      line-height: 1.75;
+      color: var(--mid);
+      max-width: 680px;
+    }
+
+    /* ── NAV ──────────────────────────────────────────────────── */
+    #nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      height: var(--nav-h);
+      background: rgba(13,13,13,0.92);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+      transition: background var(--transition);
+    }
+
+    #nav .container {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .nav-logo svg { flex-shrink: 0; }
+
+    .nav-wordmark {
+      display: flex;
+      flex-direction: column;
+      line-height: 1;
+    }
+    .nav-wordmark .idr {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: 3px;
+      color: var(--white);
+    }
+    .nav-wordmark .full {
+      font-family: 'Barlow', sans-serif;
+      font-size: 9px;
+      font-weight: 500;
+      letter-spacing: 2.2px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+      margin-top: 2px;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-family: 'Barlow', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.72);
+      transition: color var(--transition);
+      position: relative;
+    }
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px; left: 0;
+      width: 0; height: 2px;
+      background: var(--orange);
+      transition: width var(--transition);
+    }
+    .nav-links a:hover { color: var(--white); }
+    .nav-links a:hover::after { width: 100%; }
+
+    .nav-cta { margin-left: 8px; }
+
+    /* Hamburger */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+    }
+    .hamburger span {
+      display: block;
+      width: 24px; height: 2px;
+      background: var(--white);
+      border-radius: 2px;
+      transition: transform 0.3s, opacity 0.3s;
+    }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: var(--nav-h);
+      left: 0; right: 0;
+      background: var(--black);
+      padding: 24px;
+      z-index: 999;
+      flex-direction: column;
+      gap: 20px;
+      border-bottom: 2px solid var(--orange);
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      font-family: 'Barlow', sans-serif;
+      font-size: 16px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.8);
+      padding: 8px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    /* ── HERO ─────────────────────────────────────────────────── */
+    #hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      background: var(--black);
+      overflow: hidden;
+      padding-top: var(--nav-h);
+    }
+
+    /* Grid background */
+    #hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,98,0,0.07) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,98,0,0.07) 1px, transparent 1px);
+      background-size: 60px 60px;
+      mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 100%);
+    }
+
+    /* Glow blob */
+    #hero::after {
+      content: '';
+      position: absolute;
+      top: -100px; right: -100px;
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(255,98,0,0.18) 0%, transparent 65%);
+      pointer-events: none;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+      padding: 80px 0;
+    }
+
+    .hero-text {}
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255,98,0,0.12);
+      border: 1px solid rgba(255,98,0,0.3);
+      border-radius: 100px;
+      padding: 6px 16px;
+      margin-bottom: 28px;
+    }
+    .hero-badge span {
+      font-family: 'Barlow', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--orange);
+    }
+    .hero-badge::before {
+      content: '';
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--orange);
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.8); }
+    }
+
+    .hero-headline {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: clamp(42px, 5.5vw, 72px);
+      font-weight: 800;
+      line-height: 1.0;
+      color: var(--white);
+      margin-bottom: 24px;
+      letter-spacing: -0.5px;
+    }
+    .hero-headline em {
+      font-style: normal;
+      color: var(--orange);
+    }
+
+    .hero-sub {
+      font-size: 18px;
+      line-height: 1.7;
+      color: rgba(255,255,255,0.6);
+      margin-bottom: 36px;
+      max-width: 480px;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .hero-stats {
+      display: flex;
+      gap: 32px;
+      margin-top: 48px;
+      padding-top: 40px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+    .stat-item {}
+    .stat-num {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 36px;
+      font-weight: 800;
+      color: var(--orange);
+      line-height: 1;
+    }
+    .stat-label {
+      font-size: 12px;
+      color: rgba(255,255,255,0.45);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-top: 4px;
+    }
+
+    /* Hero cube illustration */
+    .hero-visual {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .cube-3d {
+      width: 320px;
+      height: 320px;
+      position: relative;
+      animation: float 6s ease-in-out infinite;
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-18px); }
+    }
+
+    /* ── PIPELINE ─────────────────────────────────────────────── */
+    #pipeline {
+      background: var(--orange);
+      padding: 28px 0;
+      overflow: hidden;
+    }
+    .pipeline-inner {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0;
+      flex-wrap: wrap;
+    }
+    .pipeline-step {
+      display: flex;
+      align-items: center;
+      gap: 0;
+    }
+    .pipeline-label {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 18px;
+      font-weight: 800;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--white);
+      padding: 0 24px;
+    }
+    .pipeline-arrow {
+      font-size: 20px;
+      color: rgba(255,255,255,0.5);
+    }
+
+    /* ── ABOUT ────────────────────────────────────────────────── */
+    #about {
+      padding: 100px 0;
+      background: var(--white);
+    }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+    .about-visual {
+      position: relative;
+    }
+    .about-card {
+      background: var(--mist);
+      border-radius: 8px;
+      padding: 40px;
+      border-left: 4px solid var(--orange);
+    }
+    .about-card + .about-card {
+      margin-top: 20px;
+      border-left-color: var(--black);
+    }
+    .about-card-title {
+      font-family: 'Barlow', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--orange);
+      margin-bottom: 8px;
+    }
+    .about-card + .about-card .about-card-title { color: var(--ink); }
+    .about-card-text {
+      font-size: 15px;
+      color: var(--mid);
+      line-height: 1.65;
+    }
+    .about-badge {
+      position: absolute;
+      bottom: -12px; right: -12px;
+      background: var(--orange);
+      color: var(--white);
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 10px 18px;
+      border-radius: var(--radius);
+    }
+
+    /* ── SERVICES ─────────────────────────────────────────────── */
+    #services {
+      padding: 100px 0;
+      background: var(--mist);
+    }
+    .services-header {
+      text-align: center;
+      max-width: 600px;
+      margin: 0 auto 64px;
+    }
+    .services-header .section-body { margin: 0 auto; }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .service-card {
+      background: var(--white);
+      border-radius: 8px;
+      padding: 40px 36px;
+      border: 1px solid rgba(0,0,0,0.06);
+      transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+    .service-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: var(--orange);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform var(--transition);
+    }
+    .service-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+      border-color: rgba(255,98,0,0.15);
+    }
+    .service-card:hover::before { transform: scaleX(1); }
+
+    .service-icon {
+      width: 52px; height: 52px;
+      background: var(--orange-pale);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 24px;
+    }
+    .service-icon svg { width: 26px; height: 26px; }
+
+    .service-title {
+      font-family: 'Barlow', sans-serif;
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 12px;
+    }
+    .service-desc {
+      font-size: 15px;
+      color: var(--mid);
+      line-height: 1.7;
+      margin-bottom: 24px;
+    }
+    .service-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .tag {
+      font-family: 'Barlow', sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      background: var(--mist);
+      color: var(--mid);
+      padding: 4px 10px;
+      border-radius: 3px;
+    }
+
+    /* ── COMMUNITY ────────────────────────────────────────────── */
+    #community {
+      padding: 100px 0;
+      background: var(--black);
+    }
+    .community-inner {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 80px;
+      align-items: center;
+    }
+    .community-text .section-title { color: var(--white); }
+    .community-text .section-body { color: rgba(255,255,255,0.55); }
+
+    .community-cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    .comm-card {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.09);
+      border-radius: 8px;
+      padding: 28px 24px;
+      transition: background var(--transition), border-color var(--transition);
+    }
+    .comm-card:hover {
+      background: rgba(255,98,0,0.08);
+      border-color: rgba(255,98,0,0.3);
+    }
+    .comm-card-icon {
+      font-size: 28px;
+      margin-bottom: 12px;
+    }
+    .comm-card-title {
+      font-family: 'Barlow', sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 8px;
+    }
+    .comm-card-desc {
+      font-size: 13px;
+      color: rgba(255,255,255,0.45);
+      line-height: 1.6;
+    }
+
+    .sectors {
+      margin-top: 40px;
+      padding-top: 32px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+    .sectors-label {
+      font-family: 'Barlow', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.3);
+      margin-bottom: 16px;
+    }
+    .sectors-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .sector-chip {
+      font-family: 'Barlow', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.7);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 100px;
+      padding: 6px 14px;
+      transition: border-color var(--transition), color var(--transition);
+    }
+    .sector-chip:hover {
+      border-color: var(--orange);
+      color: var(--orange);
+    }
+
+    /* ── CONTACT ──────────────────────────────────────────────── */
+    #contact {
+      padding: 100px 0;
+      background: var(--white);
+    }
+    .contact-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+
+    .contact-info .section-body { margin-bottom: 40px; }
+
+    .contact-detail {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+    .contact-detail-icon {
+      width: 40px; height: 40px;
+      background: var(--orange-pale);
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .contact-detail-text {}
+    .contact-detail-label {
+      font-family: 'Barlow', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--mid);
+    }
+    .contact-detail-value {
+      font-size: 15px;
+      color: var(--ink);
+      font-weight: 500;
+    }
+
+    .contact-form {
+      background: var(--mist);
+      border-radius: 12px;
+      padding: 48px 40px;
+    }
+
+    .form-title {
+      font-family: 'Barlow', sans-serif;
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 8px;
+    }
+    .form-subtitle {
+      font-size: 14px;
+      color: var(--mid);
+      margin-bottom: 32px;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-bottom: 20px;
+    }
+    .form-group.full { grid-column: 1 / -1; }
+
+    label {
+      font-family: 'Barlow', sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--mid);
+    }
+
+    input, select, textarea {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 15px;
+      color: var(--ink);
+      background: var(--white);
+      border: 1.5px solid rgba(0,0,0,0.12);
+      border-radius: var(--radius);
+      padding: 12px 16px;
+      width: 100%;
+      outline: none;
+      transition: border-color var(--transition), box-shadow var(--transition);
+    }
+    input:focus, select:focus, textarea:focus {
+      border-color: var(--orange);
+      box-shadow: 0 0 0 3px rgba(255,98,0,0.1);
+    }
+    textarea { resize: vertical; min-height: 120px; }
+
+    .form-submit {
+      width: 100%;
+      padding: 16px;
+      justify-content: center;
+    }
+
+    /* ── FOOTER ───────────────────────────────────────────────── */
+    footer {
+      background: var(--black);
+      padding: 60px 0 32px;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .footer-top {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 48px;
+      padding-bottom: 48px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      margin-bottom: 32px;
+    }
+
+    .footer-brand .nav-wordmark .idr { font-size: 26px; }
+    .footer-brand p {
+      font-size: 13px;
+      color: rgba(255,255,255,0.4);
+      line-height: 1.7;
+      margin-top: 16px;
+      max-width: 240px;
+    }
+
+    .footer-col-title {
+      font-family: 'Barlow', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.35);
+      margin-bottom: 20px;
+    }
+
+    .footer-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .footer-links a {
+      font-size: 14px;
+      color: rgba(255,255,255,0.55);
+      transition: color var(--transition);
+    }
+    .footer-links a:hover { color: var(--orange); }
+
+    .footer-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .footer-copy {
+      font-size: 13px;
+      color: rgba(255,255,255,0.3);
+    }
+    .footer-copy a { color: var(--orange); }
+    .footer-legal {
+      display: flex;
+      gap: 24px;
+    }
+    .footer-legal a {
+      font-size: 12px;
+      color: rgba(255,255,255,0.3);
+      transition: color var(--transition);
+    }
+    .footer-legal a:hover { color: rgba(255,255,255,0.6); }
+
+    /* ── SCROLL ANIMATION ─────────────────────────────────────── */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── RESPONSIVE ───────────────────────────────────────────── */
+    @media (max-width: 960px) {
+      .hero-content { grid-template-columns: 1fr; gap: 40px; padding: 60px 0; }
+      .hero-visual { display: none; }
+      .about-grid { grid-template-columns: 1fr; gap: 48px; }
+      .services-grid { grid-template-columns: 1fr 1fr; }
+      .community-inner { grid-template-columns: 1fr; gap: 48px; }
+      .contact-inner { grid-template-columns: 1fr; gap: 48px; }
+      .footer-top { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 680px) {
+      .nav-links { display: none; }
+      .nav-cta { display: none; }
+      .hamburger { display: flex; }
+      .services-grid { grid-template-columns: 1fr; }
+      .community-cards { grid-template-columns: 1fr; }
+      .form-row { grid-template-columns: 1fr; }
+      .footer-top { grid-template-columns: 1fr; gap: 32px; }
+      .footer-bottom { flex-direction: column; gap: 16px; text-align: center; }
+      .hero-stats { gap: 20px; flex-wrap: wrap; }
+      .pipeline-inner { gap: 12px; }
+      .pipeline-label { font-size: 14px; padding: 0 12px; }
+      .contact-form { padding: 32px 24px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── NAVIGATION ──────────────────────────────────────────── -->
+  <header>
+    <nav id="nav" role="navigation" aria-label="Main navigation">
+      <div class="container">
+        <a href="#hero" class="nav-logo" aria-label="IDR Home">
+          <!-- Inline cube logo -->
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40" width="38" height="38" aria-hidden="true">
+            <defs>
+              <linearGradient id="nfg" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#FF6200"/>
+                <stop offset="100%" stop-color="#E85000"/>
+              </linearGradient>
+            </defs>
+            <polygon points="20,4 34,12 20,20 6,12" fill="url(#nfg)"/>
+            <polygon points="6,12 20,20 20,32 6,24" fill="#2A2A2A"/>
+            <polygon points="34,12 20,20 20,32 34,24" fill="#C04800"/>
+            <line x1="20" y1="9" x2="20" y2="18" stroke="white" stroke-width="1.8" stroke-linecap="round"/>
+            <circle cx="20" cy="19.5" r="1" fill="white"/>
+          </svg>
+          <div class="nav-wordmark">
+            <span class="idr">IDR</span>
+            <span class="full">Institute of Digital Risk</span>
+          </div>
+        </a>
+
+        <ul class="nav-links" role="list">
+          <li><a href="#about">About</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#community">Community</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+
+        <a href="#contact" class="btn btn-primary nav-cta">Register Interest</a>
+
+        <button class="hamburger" id="hamburger" aria-label="Toggle mobile menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </nav>
+
+    <nav class="mobile-menu" id="mobile-menu" aria-label="Mobile navigation">
+      <a href="#about" class="mobile-link">About</a>
+      <a href="#services" class="mobile-link">Services</a>
+      <a href="#community" class="mobile-link">Community</a>
+      <a href="#contact" class="mobile-link">Contact</a>
+      <a href="#contact" class="btn btn-primary" style="margin-top:8px;">Register Interest</a>
+    </nav>
+  </header>
+
+  <!-- ── MAIN ────────────────────────────────────────────────── -->
+  <main>
+
+    <!-- HERO -->
+    <section id="hero" aria-labelledby="hero-headline">
+      <div class="container">
+        <div class="hero-content">
+          <div class="hero-text">
+            <div class="hero-badge"><span>Industry-Led · UK University Partner</span></div>
+            <h1 class="hero-headline" id="hero-headline">
+              Advancing<br>the Future of<br><em>Digital Risk.</em>
+            </h1>
+            <p class="hero-sub">
+              IDR trains and deploys digital risk practitioners — bridging academic rigour with real-world industry practice to build the next generation of cyber and technology risk professionals.
+            </p>
+            <div class="hero-actions">
+              <a href="#services" class="btn btn-primary">Explore Programs</a>
+              <a href="#about" class="btn btn-outline">Our Mission</a>
+            </div>
+            <div class="hero-stats">
+              <div class="stat-item">
+                <div class="stat-num">3+</div>
+                <div class="stat-label">Service Pillars</div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-num">UK</div>
+                <div class="stat-label">University Partner</div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-num">AI</div>
+                <div class="stat-label">Risk Ready</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Hero cube -->
+          <div class="hero-visual" aria-hidden="true">
+            <div class="cube-3d">
+              <svg viewBox="0 0 320 320" xmlns="http://www.w3.org/2000/svg" width="320" height="320">
+                <defs>
+                  <linearGradient id="hTop" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#FF6200" stop-opacity="1"/>
+                    <stop offset="100%" stop-color="#E04500" stop-opacity="1"/>
+                  </linearGradient>
+                  <linearGradient id="hLeft" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stop-color="#1F1F1F"/>
+                    <stop offset="100%" stop-color="#2E2E2E"/>
+                  </linearGradient>
+                  <linearGradient id="hRight" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stop-color="#C04200"/>
+                    <stop offset="100%" stop-color="#8C2E00"/>
+                  </linearGradient>
+                  <filter id="glow">
+                    <feGaussianBlur stdDeviation="6" result="blur"/>
+                    <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+                  </filter>
+                </defs>
+
+                <!-- Main cube -->
+                <polygon points="160,40 272,100 160,160 48,100" fill="url(#hTop)"/>
+                <polygon points="48,100 160,160 160,260 48,200" fill="url(#hLeft)"/>
+                <polygon points="272,100 160,160 160,260 272,200" fill="url(#hRight)"/>
+
+                <!-- Inner lines on top -->
+                <line x1="160" y1="40" x2="160" y2="160" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
+                <line x1="104" y1="70" x2="216" y2="130" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+                <line x1="216" y1="70" x2="104" y2="130" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+
+                <!-- Alert exclamation -->
+                <line x1="160" y1="72" x2="160" y2="128" stroke="white" stroke-width="8" stroke-linecap="round" filter="url(#glow)" opacity="0.95"/>
+                <circle cx="160" cy="145" r="5.5" fill="white" filter="url(#glow)" opacity="0.95"/>
+
+                <!-- Shadow/reflection ellipse -->
+                <ellipse cx="160" cy="284" rx="80" ry="12" fill="rgba(255,98,0,0.12)"/>
+
+                <!-- Floating mini cubes -->
+                <g opacity="0.4">
+                  <polygon points="52,58 68,67 52,76 36,67" fill="#FF6200"/>
+                  <polygon points="36,67 52,76 52,92 36,83" fill="#1F1F1F"/>
+                  <polygon points="68,67 52,76 52,92 68,83" fill="#C04200"/>
+                </g>
+                <g opacity="0.3">
+                  <polygon points="262,200 278,209 262,218 246,209" fill="#FF6200"/>
+                  <polygon points="246,209 262,218 262,234 246,225" fill="#1F1F1F"/>
+                  <polygon points="278,209 262,218 262,234 278,225" fill="#C04200"/>
+                </g>
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PIPELINE STRIP -->
+    <section id="pipeline" aria-label="IDR model pipeline">
+      <div class="container">
+        <div class="pipeline-inner">
+          <div class="pipeline-step">
+            <span class="pipeline-label">Train</span>
+            <span class="pipeline-arrow">→</span>
+          </div>
+          <div class="pipeline-step">
+            <span class="pipeline-label">Hire</span>
+            <span class="pipeline-arrow">→</span>
+          </div>
+          <div class="pipeline-step">
+            <span class="pipeline-label">Innovate</span>
+            <span class="pipeline-arrow">→</span>
+          </div>
+          <div class="pipeline-step">
+            <span class="pipeline-label">Deploy</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about" aria-labelledby="about-title">
+      <div class="container">
+        <div class="about-grid">
+          <div class="about-text fade-up">
+            <p class="section-label">Who We Are</p>
+            <h2 class="section-title" id="about-title">Where Industry Meets Academic Rigour</h2>
+            <p class="section-body">
+              The Institute of Digital Risk (IDR) is an industry-led training and deployment institute specialising in digital, cyber, and technology risk. We develop practitioners equipped for high-stakes, regulated environments — from financial services to critical national infrastructure.
+            </p>
+            <p class="section-body" style="margin-top:16px;">
+              IDR uniquely bridges academic insight — through our partnership with a leading UK university — and hands-on, real-world projects. Our graduates don't just learn frameworks; they apply them to live industry challenges, emerging standards, and next-generation AI risk scenarios.
+            </p>
+            <a href="#services" class="btn btn-primary" style="margin-top:36px;">Explore Our Model</a>
+          </div>
+          <div class="about-visual fade-up">
+            <div class="about-card">
+              <div class="about-card-title">Academic Partnership</div>
+              <p class="about-card-text">Co-developed curriculum with a leading UK university. Theory and research that's directly grounded in real regulatory and operational challenges.</p>
+            </div>
+            <div class="about-card">
+              <div class="about-card-title" style="color:var(--ink)">Industry Deployment</div>
+              <p class="about-card-text">We don't just train — we place. IDR graduates and fellows are deployed into partner organisations across the financial and critical infrastructure sectors.</p>
+            </div>
+            <div class="about-badge">Est. 2024 · UK</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section id="services" aria-labelledby="services-title">
+      <div class="container">
+        <div class="services-header fade-up">
+          <p class="section-label">What We Do</p>
+          <h2 class="section-title" id="services-title">Our Three Pillars</h2>
+          <p class="section-body">A fully integrated model — from building talent pipelines to developing the IP and frameworks that define tomorrow's digital risk profession.</p>
+        </div>
+
+        <div class="services-grid">
+          <!-- Academy -->
+          <article class="service-card fade-up" aria-labelledby="card-academy">
+            <div class="service-icon">
+              <svg viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M13 3L2 8.5L13 14L24 8.5L13 3Z" stroke="#FF6200" stroke-width="2" stroke-linejoin="round"/>
+                <path d="M2 8.5V17M6 10.8V18.5C6 18.5 9 21 13 21C17 21 20 18.5 20 18.5V10.8" stroke="#FF6200" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <h3 class="service-title" id="card-academy">Academy</h3>
+            <p class="service-desc">Intensive bootcamps, structured programmes and CPD pathways for students and practising professionals entering or advancing in digital and cyber risk careers.</p>
+            <div class="service-tags">
+              <span class="tag">Bootcamps</span>
+              <span class="tag">CPD</span>
+              <span class="tag">Certifications</span>
+            </div>
+          </article>
+
+          <!-- Innovation -->
+          <article class="service-card fade-up" aria-labelledby="card-innovation">
+            <div class="service-icon">
+              <svg viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="13" cy="13" r="4" stroke="#FF6200" stroke-width="2"/>
+                <path d="M13 2V5M13 21V24M2 13H5M21 13H24" stroke="#FF6200" stroke-width="2" stroke-linecap="round"/>
+                <path d="M5.6 5.6L7.8 7.8M18.2 18.2L20.4 20.4M20.4 5.6L18.2 7.8M7.8 18.2L5.6 20.4" stroke="#FF6200" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <h3 class="service-title" id="card-innovation">Innovation &amp; Incubation</h3>
+            <p class="service-desc">Developing next-generation risk IP, future models and AI governance frameworks. IDR is at the frontier of how the profession must evolve to meet emerging threats.</p>
+            <div class="service-tags">
+              <span class="tag">AI Governance</span>
+              <span class="tag">Risk IP</span>
+              <span class="tag">R&D</span>
+            </div>
+          </article>
+
+          <!-- Advisory -->
+          <article class="service-card fade-up" aria-labelledby="card-advisory">
+            <div class="service-icon">
+              <svg viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="3" y="6" width="20" height="16" rx="2" stroke="#FF6200" stroke-width="2"/>
+                <path d="M3 11H23" stroke="#FF6200" stroke-width="2"/>
+                <path d="M9 3V6M17 3V6" stroke="#FF6200" stroke-width="2" stroke-linecap="round"/>
+                <path d="M8 16H14M8 19H11" stroke="#FF6200" stroke-width="1.5" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <h3 class="service-title" id="card-advisory">Advisory Services</h3>
+            <p class="service-desc">Helping organisations implement and operationalise leading risk and security frameworks — from NIST and ISO 27001 to NIS2 and sector-specific compliance mandates.</p>
+            <div class="service-tags">
+              <span class="tag">NIST</span>
+              <span class="tag">ISO 27001</span>
+              <span class="tag">NIS2</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- COMMUNITY -->
+    <section id="community" aria-labelledby="community-title">
+      <div class="container">
+        <div class="community-inner">
+          <div class="community-text fade-up">
+            <p class="section-label" style="color:var(--orange)">Who We Serve</p>
+            <h2 class="section-title" id="community-title">A Community Built for the Front Line</h2>
+            <p class="section-body">
+              IDR serves a growing network of students, early-career professionals and seasoned practitioners in sectors where digital and cyber risk is mission-critical. Whether you're starting out or looking to deepen expertise, there's a place for you in the IDR community.
+            </p>
+            <div class="sectors">
+              <p class="sectors-label">Key Sectors</p>
+              <div class="sectors-list">
+                <span class="sector-chip">Financial Services</span>
+                <span class="sector-chip">Critical Infrastructure</span>
+                <span class="sector-chip">Healthcare</span>
+                <span class="sector-chip">Government</span>
+                <span class="sector-chip">Energy</span>
+                <span class="sector-chip">Defence</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="community-cards fade-up">
+            <div class="comm-card">
+              <div class="comm-card-icon">🎓</div>
+              <div class="comm-card-title">Students</div>
+              <p class="comm-card-desc">Undergraduate and postgraduate learners seeking a career path into cyber and technology risk.</p>
+            </div>
+            <div class="comm-card">
+              <div class="comm-card-icon">🚀</div>
+              <div class="comm-card-title">Early-Career</div>
+              <p class="comm-card-desc">Professionals 1–5 years in, building specialist skills and portfolio in regulated environments.</p>
+            </div>
+            <div class="comm-card">
+              <div class="comm-card-icon">🔒</div>
+              <div class="comm-card-title">Practitioners</div>
+              <p class="comm-card-desc">Senior risk and security professionals seeking upskilling in AI, digital risk and modern frameworks.</p>
+            </div>
+            <div class="comm-card">
+              <div class="comm-card-icon">🏢</div>
+              <div class="comm-card-title">Organisations</div>
+              <p class="comm-card-desc">Employers looking to hire trained, deployment-ready digital risk talent through the IDR pipeline.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" aria-labelledby="contact-title">
+      <div class="container">
+        <div class="contact-inner">
+          <div class="contact-info fade-up">
+            <p class="section-label">Get In Touch</p>
+            <h2 class="section-title" id="contact-title">Join the IDR Network</h2>
+            <p class="section-body">
+              Whether you're a student, employer, practitioner or academic partner — register your interest and we'll be in touch about how IDR can work for you.
+            </p>
+            <div style="margin-top:40px;">
+              <div class="contact-detail">
+                <div class="contact-detail-icon">
+                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                    <path d="M2 5L10 11L18 5" stroke="#FF6200" stroke-width="1.8" stroke-linecap="round"/>
+                    <rect x="2" y="4" width="16" height="12" rx="2" stroke="#FF6200" stroke-width="1.8"/>
+                  </svg>
+                </div>
+                <div class="contact-detail-text">
+                  <div class="contact-detail-label">Email</div>
+                  <div class="contact-detail-value">info@idr.institute</div>
+                </div>
+              </div>
+              <div class="contact-detail">
+                <div class="contact-detail-icon">
+                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                    <circle cx="10" cy="8" r="3" stroke="#FF6200" stroke-width="1.8"/>
+                    <path d="M10 2C6.7 2 4 4.7 4 8C4 12 10 18 10 18C10 18 16 12 16 8C16 4.7 13.3 2 10 2Z" stroke="#FF6200" stroke-width="1.8"/>
+                  </svg>
+                </div>
+                <div class="contact-detail-text">
+                  <div class="contact-detail-label">Location</div>
+                  <div class="contact-detail-value">United Kingdom</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="contact-form fade-up">
+            <div class="form-title">Register Your Interest</div>
+            <div class="form-subtitle">We'll follow up within 2 business days.</div>
+
+            <form id="contact-form" novalidate>
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="fname">First Name</label>
+                  <input type="text" id="fname" name="fname" placeholder="Jane" required autocomplete="given-name"/>
+                </div>
+                <div class="form-group">
+                  <label for="lname">Last Name</label>
+                  <input type="text" id="lname" name="lname" placeholder="Smith" required autocomplete="family-name"/>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" name="email" placeholder="jane@example.com" required autocomplete="email"/>
+              </div>
+              <div class="form-group">
+                <label for="role">I am a…</label>
+                <select id="role" name="role">
+                  <option value="">Select your role</option>
+                  <option>Student</option>
+                  <option>Early-Career Professional</option>
+                  <option>Practitioner / Specialist</option>
+                  <option>Employer / Organisation</option>
+                  <option>Academic Partner</option>
+                  <option>Other</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="message">Message</label>
+                <textarea id="message" name="message" placeholder="Tell us about your interest in IDR…"></textarea>
+              </div>
+              <button type="submit" class="btn btn-primary form-submit">Send Message →</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ── FOOTER ──────────────────────────────────────────────── -->
+  <footer>
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <div class="nav-logo">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40" width="34" height="34" aria-hidden="true">
+              <defs>
+                <linearGradient id="ffg" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#FF6200"/>
+                  <stop offset="100%" stop-color="#E85000"/>
+                </linearGradient>
+              </defs>
+              <polygon points="20,4 34,12 20,20 6,12" fill="url(#ffg)"/>
+              <polygon points="6,12 20,20 20,32 6,24" fill="#2A2A2A"/>
+              <polygon points="34,12 20,20 20,32 34,24" fill="#C04800"/>
+              <line x1="20" y1="9" x2="20" y2="18" stroke="white" stroke-width="1.8" stroke-linecap="round"/>
+              <circle cx="20" cy="19.5" r="1" fill="white"/>
+            </svg>
+            <div class="nav-wordmark">
+              <span class="idr">IDR</span>
+              <span class="full">Institute of Digital Risk</span>
+            </div>
+          </div>
+          <p>An industry-led training and deployment institute for digital, cyber and technology risk. UK-based. Globally relevant.</p>
+        </div>
+
+        <div class="footer-col">
+          <div class="footer-col-title">Institute</div>
+          <ul class="footer-links">
+            <li><a href="#about">About IDR</a></li>
+            <li><a href="#services">Our Model</a></li>
+            <li><a href="#community">Community</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <div class="footer-col-title">Programmes</div>
+          <ul class="footer-links">
+            <li><a href="#services">IDR Academy</a></li>
+            <li><a href="#services">Innovation Lab</a></li>
+            <li><a href="#services">Advisory</a></li>
+            <li><a href="#contact">Partner With Us</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <div class="footer-col-title">Frameworks</div>
+          <ul class="footer-links">
+            <li><a href="#services">NIST CSF</a></li>
+            <li><a href="#services">ISO 27001</a></li>
+            <li><a href="#services">NIS2</a></li>
+            <li><a href="#services">AI Governance</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p class="footer-copy">© 2024 Institute of Digital Risk. All rights reserved.</p>
+        <nav class="footer-legal" aria-label="Legal links">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Use</a>
+          <a href="#">Accessibility</a>
+        </nav>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ── JAVASCRIPT ────────────────────────────────────────────  -->
+  <script>
+    // Mobile nav toggle
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    hamburger.addEventListener('click', () => {
+      const isOpen = mobileMenu.classList.toggle('open');
+      hamburger.classList.toggle('open', isOpen);
+      hamburger.setAttribute('aria-expanded', isOpen);
+    });
+
+    // Close mobile menu on link click
+    document.querySelectorAll('.mobile-link, .mobile-menu .btn').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.remove('open');
+        hamburger.classList.remove('open');
+        hamburger.setAttribute('aria-expanded', false);
+      });
+    });
+
+    // Scroll fade-up animation
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          // Stagger children if service grid
+          if (entry.target.closest('.services-grid') || entry.target.closest('.community-cards')) {
+            const siblings = entry.target.parentElement.querySelectorAll('.fade-up');
+            siblings.forEach((el, i) => {
+              setTimeout(() => el.classList.add('visible'), i * 100);
+            });
+          }
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+    // Form submission
+    const form = document.getElementById('contact-form');
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const btn = form.querySelector('.form-submit');
+      btn.textContent = '✓ Message Sent — We\'ll Be in Touch';
+      btn.style.background = '#1A6B1A';
+      btn.style.borderColor = '#1A6B1A';
+      btn.disabled = true;
+    });
+
+    // Active nav highlight on scroll
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.nav-links a');
+
+    window.addEventListener('scroll', () => {
+      let current = '';
+      sections.forEach(section => {
+        const top = section.offsetTop - 100;
+        if (scrollY >= top) current = section.getAttribute('id');
+      });
+      navLinks.forEach(link => {
+        link.style.color = link.getAttribute('href') === `#${current}`
+          ? 'var(--orange)'
+          : '';
+      });
+    }, { passive: true });
+  </script>
+</body>
+</html>
